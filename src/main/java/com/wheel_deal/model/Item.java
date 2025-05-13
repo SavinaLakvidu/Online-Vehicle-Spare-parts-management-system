@@ -1,7 +1,5 @@
 package com.wheel_deal.model;
 
-import java.util.Date;
-
 public class Item extends AbstractItem {
 
     public Item() {}
@@ -13,8 +11,7 @@ public class Item extends AbstractItem {
         setCategory(category);
         setQuantityInStock(quantityInStock);
         setPrice(price);
-        setSupplierName(supplierName);
-        setLastUpdated(new Date());
+        setSupplierName(supplierName);        
     }
 
     @Override
@@ -27,7 +24,6 @@ public class Item extends AbstractItem {
                 ", price=" + getPrice() +
                 ", supplierName='" + getSupplierName() + '\'' +
                 ", dateAdded=" + getDateAdded() +
-                ", lastUpdated=" + getLastUpdated() +
                 '}';
     }
 }

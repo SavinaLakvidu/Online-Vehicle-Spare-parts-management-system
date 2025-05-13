@@ -1,0 +1,176 @@
+body {
+    font-family: Outfit-medium,Arial;
+}
+
+header {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding-bottom: 0.65em;
+
+}
+
+.container img  {
+
+    width: 10%;
+    height: 10%;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1.5em;
+    margin-right: 2.7em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    
+}
+
+nav ul li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.banner {
+    
+    position:relative; }
+
+.banner img {
+
+    max-width: 100%;
+    height: auto;
+}
+
+.bannerText {
+
+    position: absolute;
+    top:9%;
+    color: white;
+    text-align: center;
+}
+
+.bannerText h2 {
+    font-size: 2.7em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #e1b040;
+}
+
+.bannerText p {
+    text-align:center;
+    font-size: 1.25em;
+    padding: 0 5em 0 5em;
+}
+
+.bannerButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; 
+}
+
+.button {
+    background-color: #e1b040;
+    color: black;
+    padding: 1%;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 10px;
+    font-weight: bold;
+    
+}
+
+.button:hover {
+    background-color: white;
+}
+
+.feature {
+    background-color: white;
+}
+
+.feature h3 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 1em;
+}
+.feature-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    gap: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.feature-item {
+    color: black;
+    text-align: center;
+    background-color: #e1b040;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.feature-item img {
+    max-width: 5em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    align-items: center;
+}
+
+
+.feature-item p {
+
+    text-align: justify;
+    text-align-last: center;
+    padding: 0 1em 0 1em;
+}
+
+
+.feature-item h4 {
+
+    font-size: 1em;
+    text-transform: uppercase;
+
+}
+
+.f2container  {
+    margin: 0.25em 1.5em 1.5em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.f2container ul {
+
+    list-style: none;
+}
+
+.f2container ul li {
+    padding-bottom: 0.5em;
+}
+
+.f2container iframe {
+
+    width: 50%;
+    height: auto;
+}
+
+
+hr {
+
+    height: 0.15em;
+    background-color: black;
+    margin-top: 2em;
+}

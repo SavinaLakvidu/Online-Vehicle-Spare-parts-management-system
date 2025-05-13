@@ -11,7 +11,6 @@ public abstract class AbstractItem {
     private double price;
     private String supplierName;
     private Date dateAdded;
-    private Date lastUpdated;
 
 	// Getters and Setters for the common attributes
     public int getPartId() {
@@ -68,14 +67,6 @@ public abstract class AbstractItem {
 
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
     }
 
     public abstract void updateItemDetails(String partName, String category, int quantityInStock, double price, String supplierName);

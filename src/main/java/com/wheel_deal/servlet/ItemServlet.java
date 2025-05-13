@@ -23,7 +23,15 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Item> items = itemService.getAllItems();
+            	
+        HttpSession session = request.getSession(false); // false: don't create if it doesn't exist
+
+        if (session == null || session.getAttribute("username") == null) {            
+            response.sendRedirect("Login.jsp");
+            return;
+        }    
+        
+    	List<Item> items = itemService.getAllItems();
         request.setAttribute("items", items);
         request.getRequestDispatcher("manage_Inventory.jsp").forward(request, response);
     }
@@ -43,8 +51,7 @@ public class ItemServlet extends HttpServlet {
                 double price = Double.parseDouble(request.getParameter("price"));
 
                 Item existingItem = itemService.getItem(partId);
-                Date dateAdded = existingItem.getDateAdded();
-                Date lastUpdated = new Date(); // Current time
+                Date dateAdded = existingItem.getDateAdded();               
 
                 Item item = new Item();
                 item.setPartId(partId);
@@ -53,8 +60,7 @@ public class ItemServlet extends HttpServlet {
                 item.setSupplierName(supplierName);
                 item.setQuantityInStock(quantityInStock);
                 item.setPrice(price);
-                item.setDateAdded(dateAdded);
-                item.setLastUpdated(lastUpdated);
+                item.setDateAdded(dateAdded);               
 
                 boolean success = itemService.updateItem(item);
                 if (success) {
@@ -84,8 +90,7 @@ public class ItemServlet extends HttpServlet {
                     return;
                 }
                 
-                Date dateAdded = new Date(); // Set current date for new items
-                Date lastUpdated = new Date();
+                Date dateAdded = new Date(); // Set current date for new items                
 
                 Item item = new Item();
                 item.setPartName(partName);
@@ -93,8 +98,7 @@ public class ItemServlet extends HttpServlet {
                 item.setSupplierName(supplierName);
                 item.setQuantityInStock(quantityInStock);
                 item.setPrice(price);
-                item.setDateAdded(dateAdded);
-                item.setLastUpdated(lastUpdated);
+                item.setDateAdded(dateAdded);                
 
                 boolean success = itemService.createItem(item);
                 if (success) {

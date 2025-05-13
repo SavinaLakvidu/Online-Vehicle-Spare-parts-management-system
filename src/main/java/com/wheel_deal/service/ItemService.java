@@ -20,8 +20,8 @@ public class ItemService implements ItemServiceInterface {
         }
     	
     	String checkQuery = "SELECT PartID, QuantityInStock FROM InventoryManagement WHERE PartName = ? AND Category = ? AND Price = ?";
-        String updateQuery = "UPDATE InventoryManagement SET QuantityInStock = ?, LastUpdated = ? WHERE PartID = ?";
-        String insertQuery = "INSERT INTO InventoryManagement (PartName, Category, QuantityInStock, Price, SupplierName, DateAdded, LastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String updateQuery = "UPDATE InventoryManagement SET QuantityInStock = ? WHERE PartID = ?";
+        String insertQuery = "INSERT INTO InventoryManagement (PartName, Category, QuantityInStock, Price, SupplierName, DateAdded) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection()) {
             // Check for existing item
@@ -39,9 +39,8 @@ public class ItemService implements ItemServiceInterface {
                     int newQty = existingQty + item.getQuantityInStock();
 
                     try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
-                        updateStmt.setInt(1, newQty);
-                        updateStmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-                        updateStmt.setInt(3, partId);
+                        updateStmt.setInt(1, newQty);                        
+                        updateStmt.setInt(2, partId);
                         return updateStmt.executeUpdate() > 0;
                     }
                 } else {
@@ -52,8 +51,7 @@ public class ItemService implements ItemServiceInterface {
                         insertStmt.setInt(3, item.getQuantityInStock());
                         insertStmt.setDouble(4, item.getPrice());
                         insertStmt.setString(5, item.getSupplierName());
-                        insertStmt.setDate(6, new java.sql.Date(item.getDateAdded().getTime()));
-                        insertStmt.setTimestamp(7, new java.sql.Timestamp(item.getLastUpdated().getTime()));
+                        insertStmt.setDate(6, new java.sql.Date(item.getDateAdded().getTime()));                        
                         return insertStmt.executeUpdate() > 0;
                     }
                 }
@@ -81,8 +79,7 @@ public class ItemService implements ItemServiceInterface {
                 item.setQuantityInStock(rs.getInt("QuantityInStock"));
                 item.setPrice(rs.getDouble("Price"));
                 item.setSupplierName(rs.getString("SupplierName"));
-                item.setDateAdded(rs.getDate("DateAdded"));
-                item.setLastUpdated(rs.getTimestamp("LastUpdated"));
+                item.setDateAdded(rs.getDate("DateAdded"));               
                 return item;
             }
         } catch (SQLException e) {
@@ -109,7 +106,6 @@ public class ItemService implements ItemServiceInterface {
                 item.setPrice(rs.getDouble("Price"));
                 item.setSupplierName(rs.getString("SupplierName"));
                 item.setDateAdded(rs.getDate("DateAdded"));
-                item.setLastUpdated(rs.getTimestamp("LastUpdated"));
                 items.add(item);
             }
         } catch (SQLException e) {
@@ -125,7 +121,7 @@ public class ItemService implements ItemServiceInterface {
     	item.updateItemDetails(item.getPartName(), item.getCategory(), item.getQuantityInStock(), item.getPrice(), item.getSupplierName());
     	
         String query = "UPDATE InventoryManagement SET PartName = ?, Category = ?, QuantityInStock = ?, Price = ?, " +
-                       "SupplierName = ?, DateAdded = ?, LastUpdated = ? WHERE PartID = ?";
+                       "SupplierName = ?, DateAdded = ? WHERE PartID = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
@@ -135,8 +131,7 @@ public class ItemService implements ItemServiceInterface {
             stmt.setDouble(4, item.getPrice());
             stmt.setString(5, item.getSupplierName());
             stmt.setDate(6, new java.sql.Date(item.getDateAdded().getTime()));
-            stmt.setTimestamp(7, new java.sql.Timestamp(item.getLastUpdated().getTime()));
-            stmt.setInt(8, item.getPartId());
+            stmt.setInt(7, item.getPartId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {

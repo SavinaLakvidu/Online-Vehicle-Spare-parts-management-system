@@ -1,28 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String username = (String) session.getAttribute("username");
+    if (username == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Vehicle Spare Parts Management System</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	<link rel="stylesheet" href="Styles/Navigation_Bar_styles.css" />
-	<link rel="stylesheet" href="Styles/search_filter.css" />
-	<link rel="stylesheet" href="Styles/Inventory_table.css" />
-	<link rel="stylesheet" href="Styles/Footer.css" />
-	<link rel="stylesheet" href="Styles/EditPartForm.css" />
+	<link rel="stylesheet" href="Inventory_Styles/Navigation_Bar_styles.css" />
+	<link rel="stylesheet" href="Inventory_Styles/search_filter.css" />
+	<link rel="stylesheet" href="Inventory_Styles/Inventory_table.css" />
+	<link rel="stylesheet" href="Inventory_Styles/Footer.css" />
+	<link rel="stylesheet" href="Inventory_Styles/EditPartForm.css" />
 </head>
 <body>
 	<header>
-		<img src="Styles/LOGO.png" class="logo-img">
+		<img src="Inventory_Styles/LOGO.png" class="logo-img">
     	<nav>
       		<ul>
-		        <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+		        <li><a href="HomePage.jsp"><i class="fa-solid fa-house"></i> Home page</a></li>
 		        <li><a href="#"><i class="fas fa-cogs"></i> Inventory</a></li>
 		        <li><a href="#"><i class="fas fa-truck"></i> Suppliers</a></li>
 		        <li><a href="#"><i class="fas fa-file-invoice"></i> Orders</a></li>
-		        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+		        <li><a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
       		</ul>
     	</nav>
 
